@@ -2,6 +2,7 @@
 import { myArray } from "./data-structures/Array";
 import { Stack } from "./data-structures/Stack";
 import { Queue } from "./data-structures/Queue";
+import { LinkedList } from "./data-structures/LinkedList";
 
 // Algorithms
 import { linearSearch } from "./algorithms/linear-search";
