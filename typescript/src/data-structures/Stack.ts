@@ -1,33 +1,47 @@
-export class Stack {
-  private elements: number[];
-  private capacity: number;
+class Node {
+  public element: number;
+  public next: Node | null = null;
 
-  constructor(capacity: number) {
-    this.elements = [];
-    this.capacity = capacity;
+  constructor(element: number) {
+    this.element = element;
   }
+}
+export class Stack {
+  private topNode: Node | null;
 
-  isFull(): boolean {
-    return this.elements.length == this.capacity;
+  constructor(element: number) {
+    this.topNode = new Node(element);
   }
 
   isEmpty(): boolean {
-    return this.elements.length == 0;
+    return this.topNode == null ? true : false;
   }
 
   size(): number {
-    return this.elements.length;
+    let currentNode = this.topNode;
+    if (currentNode == null) return 0;
+
+    let nodesCount: number = 0;
+    while (currentNode != null) {
+      nodesCount += 1;
+      currentNode = currentNode.next;
+    }
+    return nodesCount;
   }
 
-  push(element: number): void {
-    if (!this.isFull()) this.elements.push(element);
+  push(element: number) {
+    const newNode = new Node(element);
+    newNode.next = this.topNode;
+    this.topNode = newNode;
   }
 
-  pop(): number | undefined {
-    if (!this.isEmpty()) return this.elements.pop();
+  pop() {
+    if (this.topNode?.next) {
+      this.topNode = this.topNode.next;
+    } else this.topNode = null;
   }
 
-  top(): number | undefined {
-    if (!this.isEmpty()) return this.elements[this.elements.length - 1];
+  top(): number | null {
+    return this.topNode != null ? this.topNode.element : null;
   }
 }
